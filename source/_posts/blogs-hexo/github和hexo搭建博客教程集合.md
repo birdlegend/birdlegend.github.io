@@ -29,3 +29,29 @@ auto_excerpt:
 ```
 把enable改为对应的false改为true，length改为0，然后hexo d -g，再进主页，问题就解决了！
 
+
+#### [Hexo支持Latex公式]
+- 修改hexo博客配置文件_config.yml  
+增加配置：
+```
+math:
+  engine: 'katex' # or 'katex'
+  mathjax:
+    src: custom_mathjax_source
+    config:
+      # MathJax config
+  katex:
+    css: custom_css_source
+    js: custom_js_source # not used
+    config:
+      # KaTeX config
+```
+- 修改主题配置文件 ./themes/next/_config.yml  
+修改配置
+```
+# MathJax Support
+mathjax:
+  enable: true
+  per_page: true
+  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
+```

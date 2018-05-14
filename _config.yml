@@ -35,7 +35,7 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: true # zsb-update 创建博文时立即创建对应资源文件夹
+post_asset_folder: false # zsb-update 创建博文时不立即创建对应资源文件夹
 relative_link: false
 future: true
 highlight:
@@ -83,7 +83,7 @@ deploy:
   branch: master
 
 math:
-  engine: 'mathjax' # or 'katex'
+  engine: 'katex' # or 'katex'
   mathjax:
     src: custom_mathjax_source
     config:

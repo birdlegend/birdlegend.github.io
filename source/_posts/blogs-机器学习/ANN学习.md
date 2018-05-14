@@ -1,12 +1,14 @@
 ---
 title: ANN学习
 date: 2018-05-03 10:13:37
-tags: 
-- 神经网络 
-- ANN
-- 机器学习
 categories:
-- 神经网络
+- machine learning
+- Deep Learning
+tags:
+- machine learning
+- Deep Learning
+- ANN
+mathjax: true
 ---
 
 ## 
@@ -21,7 +23,7 @@ ANN人工神经网络。
 
 ## 神经网络组成
 
-1) 感知层(perceptron)
+1) 感知器(perceptron)
 2) 线性单元(linear unit)
 3) sigmoid单元(sigmoid unit)
 
@@ -108,9 +110,9 @@ ANN人工神经网络。
 
 ## 多层网络和反向传播算法
 
-![[一文弄懂神经网络中的反向传播法——BackPropagation](http://www.cnblogs.com/charlotte77/p/5629865.html)](https://images2015.cnblogs.com/blog/853467/201606/853467-20160630141449671-1058672778.png)
+![人工神经网络结构图](人工神经网络结构图.png)
 
-### 
+{% asset_img 神经网络训练过程图.gif 神经网络训练过程图 %}
 
 ### Step1 前向传播
 
@@ -127,3 +129,14 @@ ANN人工神经网络。
 #### 2.隐含层—>输出层的权值更新
 
 #### 3.隐含层—>隐含层的权值更新
+
+## 权值和偏置函数
+> [神经网络中w,b参数的作用（为何需要偏置b的解释）](https://blog.csdn.net/xwd18280820053/article/details/70681750)
+
+## 感知机和多层感知机
+#### 感知机
+http://www.cnblogs.com/dinghing154/p/6129307.html
+- [简单的感知机的使用界限](http://www.cnblogs.com/dinghing154/p/6130803.html)
+这篇介绍了多层感知机进行XOR运算的过程。
+- [多层感知机](https://blog.csdn.net/u014475479/article/details/78650635)
+
