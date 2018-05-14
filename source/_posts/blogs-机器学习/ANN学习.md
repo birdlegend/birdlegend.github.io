@@ -3,10 +3,10 @@ title: ANN学习
 date: 2018-05-03 10:13:37
 categories:
 - machine learning
-- Deep Learning
+- deep learning
 tags:
 - machine learning
-- Deep Learning
+- deep learning
 - ANN
 mathjax: true
 ---

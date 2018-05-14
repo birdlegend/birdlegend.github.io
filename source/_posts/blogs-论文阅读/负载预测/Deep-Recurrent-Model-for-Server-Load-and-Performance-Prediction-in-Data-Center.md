@@ -4,10 +4,10 @@ author: birdlegend
 date: 2018-05-07 21:13:02
 categories:
 - 论文
-- 负载预测
+- 时序预测
 tags:
 - 论文
-- 负载预测
+- 时序预测
 ---
 
 # Deep Recurrent Model for Server Load and Performance Prediction in Data Center

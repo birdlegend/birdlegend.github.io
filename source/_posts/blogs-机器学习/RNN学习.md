@@ -4,10 +4,10 @@ author: birdlegend
 date: 2018-05-04 14:38:08
 categories:
 - machine learning
-- Deep Learning
+- deep learning
 tags:
 - machine learning
-- Deep Learning
+- deep learning
 - RNN
 ---
 

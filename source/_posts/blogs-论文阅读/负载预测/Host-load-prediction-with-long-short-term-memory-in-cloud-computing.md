@@ -4,10 +4,10 @@ author: birdlegend
 date: 2018-05-13 16:53:13
 categories:
 - 论文
-- 负载预测
+- 时序预测
 tags:
 - 论文
-- 负载预测
+- 时序预测
 ---
 
 ## 文献信息

@@ -3,10 +3,10 @@ title: LSTM和循环网络基础教程
 date: 2018-04-27 15:10:36
 categories:
 - machine learning
-- Deep Learning
+- deep learning
 tags:
 - machine learning
-- Deep Learning
+- deep learning
 - LSTM
 ---
 ## 简介
