@@ -328,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/test/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hexo/blogs-hexo/hexo与typora结合.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -347,7 +347,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/test/" itemprop="url">test</a></h1>
+                <a class="post-title-link" href="/hexo/blogs-hexo/hexo与typora结合.html" itemprop="url">hexo与typora结合</a></h1>
         
 
         <div class="post-meta">
@@ -359,7 +359,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T15:57:44+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-23T16:48:20+08:00">
                 2018-07-23
               </time>
             
@@ -370,6 +370,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hexo/" itemprop="url" rel="index">
+                    <span itemprop="name">hexo</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -378,8 +400,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/23/test/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/test/" itemprop="commentCount">0</span> comments
+                <a href="/hexo/blogs-hexo/hexo与typora结合.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/hexo/blogs-hexo/hexo与typora结合.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -409,7 +431,24 @@
       
         
           
-            <p><img src="1532333524391.png" alt="1532333524391"></p>
+            <h2 id="typora辅助hexo进行图片显示"><a href="#typora辅助hexo进行图片显示" class="headerlink" title="typora辅助hexo进行图片显示"></a>typora辅助hexo进行图片显示</h2><p>配置博客文件的所有图片存储到博客当前路径的同名文件夹中。</p>
+<h4 id="1-修改根目录的-config-yml文件"><a href="#1-修改根目录的-config-yml文件" class="headerlink" title="1. 修改根目录的_config.yml文件"></a>1. 修改根目录的_config.yml文件</h4><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-配置typora，解决图片存储问题。"><a href="#2-配置typora，解决图片存储问题。" class="headerlink" title="2.配置typora，解决图片存储问题。"></a>2.配置typora，解决图片存储问题。</h4><p>配置typora，以使文件的所有图片都默认存储到当前路径的同名文件夹中。有三种配置typora方式。</p>
+<ul>
+<li><p>a. 修改博客项目配置</p>
+<p>在项目的scaffolds-&gt;post.md文件中，增加配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">typora-copy-images-to:</span> <span class="string">&#123;&#123;</span> <span class="string">title</span> <span class="string">&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<p>采用此方法，每次调用 <figure class="highlight plain"><figcaption><span>new filename``` 都会自动配置存储文件路径，供typora识别。</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- b. 直接在md文件中的Front-matter增加配置</span><br><span class="line"></span><br><span class="line">  ``` yaml</span><br><span class="line">  typora-copy-images-to: ./博客名</span><br></pre></td></tr></table></figure></p>
+</li>
+<li><p>c. 点击编辑-&gt;图片工具-&gt; 当插入本地文件时-&gt;复制到文件夹，修正博客图片存储路径。</p>
+</li>
+</ul>
+<p>3)  图片展示</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">![图片说明](图片.jpg)</span></span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> <a href="!--￼6--">hexo与typora结合</a><br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
           
         
@@ -458,7 +497,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/blogs-java/blogs-jvm/JVM运行机制/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -477,7 +516,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/blogs-java/blogs-jvm/JVM运行机制/" itemprop="url">JVM运行机制</a></h1>
+                <a class="post-title-link" href="/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html" itemprop="url">JVM运行机制</a></h1>
         
 
         <div class="post-meta">
@@ -541,8 +580,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/23/blogs-java/blogs-jvm/JVM运行机制/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/blogs-java/blogs-jvm/JVM运行机制/" itemprop="commentCount">0</span> comments
+                <a href="/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -574,7 +613,7 @@
           
             <p><img src="JVM运行机制/1532325494851.png" alt="1532325494851"></p>
 <p>test2</p>
-<img src="/2018/07/23/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png" title="This is an example image">
+<img src="/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png" title="This is an example image">
           
         
       
@@ -622,7 +661,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/blogs-java/java基本数据类型/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/java/blogs-java/java基本数据类型.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -641,7 +680,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/23/blogs-java/java基本数据类型/" itemprop="url">java基本数据类型</a></h1>
+                <a class="post-title-link" href="/java/blogs-java/java基本数据类型.html" itemprop="url">java基本数据类型</a></h1>
         
 
         <div class="post-meta">
@@ -694,8 +733,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/07/23/blogs-java/java基本数据类型/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/07/23/blogs-java/java基本数据类型/" itemprop="commentCount">0</span> comments
+                <a href="/java/blogs-java/java基本数据类型.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/java/blogs-java/java基本数据类型.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -794,7 +833,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/blogs-机器学习/深度学习batch-size/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/深度学习batch-size.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -813,7 +852,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/blogs-机器学习/深度学习batch-size/" itemprop="url">深度学习</a></h1>
+                <a class="post-title-link" href="/machine-learning/deep-learning/blogs-机器学习/深度学习batch-size.html" itemprop="url">深度学习</a></h1>
         
 
         <div class="post-meta">
@@ -877,8 +916,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/13/blogs-机器学习/深度学习batch-size/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/13/blogs-机器学习/深度学习batch-size/" itemprop="commentCount">0</span> comments
+                <a href="/machine-learning/deep-learning/blogs-机器学习/深度学习batch-size.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/深度学习batch-size.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -966,7 +1005,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/论文/时序预测/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -985,7 +1024,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing/" itemprop="url">Host load prediction with long short-term memory in cloud computing</a></h1>
+                <a class="post-title-link" href="/论文/时序预测/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing.html" itemprop="url">Host load prediction with long short-term memory in cloud computing</a></h1>
         
 
         <div class="post-meta">
@@ -1049,8 +1088,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/13/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/13/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing/" itemprop="commentCount">0</span> comments
+                <a href="/论文/时序预测/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/论文/时序预测/blogs-论文阅读/负载预测/Host-load-prediction-with-long-short-term-memory-in-cloud-computing.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -1144,7 +1183,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/论文/时序预测/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -1163,7 +1202,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法/" itemprop="url">基于ARIMA模型的虚拟资源动态调度方法</a></h1>
+                <a class="post-title-link" href="/论文/时序预测/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法.html" itemprop="url">基于ARIMA模型的虚拟资源动态调度方法</a></h1>
         
 
         <div class="post-meta">
@@ -1227,8 +1266,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/13/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/13/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法/" itemprop="commentCount">0</span> comments
+                <a href="/论文/时序预测/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/论文/时序预测/blogs-论文阅读/负载预测/基于ARIMA模型的虚拟资源动态调度方法.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -1306,7 +1345,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/blogs-机器学习/多标签分类、多任务分类、多输出回归概念/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -1325,7 +1364,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/13/blogs-机器学习/多标签分类、多任务分类、多输出回归概念/" itemprop="url">多标签分类、多任务分类、多输出回归概念</a></h1>
+                <a class="post-title-link" href="/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html" itemprop="url">多标签分类、多任务分类、多输出回归概念</a></h1>
         
 
         <div class="post-meta">
@@ -1378,8 +1417,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/13/blogs-机器学习/多标签分类、多任务分类、多输出回归概念/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/13/blogs-机器学习/多标签分类、多任务分类、多输出回归概念/" itemprop="commentCount">0</span> comments
+                <a href="/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -1461,7 +1500,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/blogs-机器学习/数据预处理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Netty/blogs-Netty/Netty EventLoop.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -1480,7 +1519,159 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/08/blogs-机器学习/数据预处理/" itemprop="url">数据预处理</a></h1>
+                <a class="post-title-link" href="/Netty/blogs-Netty/Netty EventLoop.html" itemprop="url">Netty EventLoop</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:31:27+08:00">
+                2018-05-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Netty/" itemprop="url" rel="index">
+                    <span itemprop="name">Netty</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Netty/blogs-Netty/Netty EventLoop.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Netty/blogs-Netty/Netty EventLoop.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://segmentfault.com/a/1190000007403873" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007403873</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/blogs-机器学习/数据预处理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/machine-learning/blogs-机器学习/数据预处理.html" itemprop="url">数据预处理</a></h1>
         
 
         <div class="post-meta">
@@ -1533,8 +1724,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/08/blogs-机器学习/数据预处理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/08/blogs-机器学习/数据预处理/" itemprop="commentCount">0</span> comments
+                <a href="/machine-learning/blogs-机器学习/数据预处理.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/blogs-机器学习/数据预处理.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -1618,7 +1809,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/blogs-Netty/Netty与Spring Boot的整合/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Netty/blogs-Netty/Netty与Spring Boot的整合.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -1637,7 +1828,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/08/blogs-Netty/Netty与Spring Boot的整合/" itemprop="url">Netty与Spring Boot的整合</a></h1>
+                <a class="post-title-link" href="/Netty/blogs-Netty/Netty与Spring Boot的整合.html" itemprop="url">Netty与Spring Boot的整合</a></h1>
         
 
         <div class="post-meta">
@@ -1690,8 +1881,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/05/08/blogs-Netty/Netty与Spring Boot的整合/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/08/blogs-Netty/Netty与Spring Boot的整合/" itemprop="commentCount">0</span> comments
+                <a href="/Netty/blogs-Netty/Netty与Spring Boot的整合.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Netty/blogs-Netty/Netty与Spring Boot的整合.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -1723,159 +1914,7 @@
           
             <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://www.jianshu.com/p/222fe9f2a564" target="_blank" rel="noopener">https://www.jianshu.com/p/222fe9f2a564</a><br><a href="https://my.oschina.net/yzwjyw/blog/1614889" target="_blank" rel="noopener">Netty与Spring Boot的整合</a></p>
 <!-- ![Netty实战思维导图](Netty实战思维导图.png) -->
-<img src="/2018/05/08/blogs-Netty/Netty与Spring%20Boot的整合/Netty实战思维导图.png" title="This is an image">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/08/blogs-Netty/Netty EventLoop/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="birdlegend">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="birdlegend的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/08/blogs-Netty/Netty EventLoop/" itemprop="url">Netty EventLoop</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:31:27+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Netty/" itemprop="url" rel="index">
-                    <span itemprop="name">Netty</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/08/blogs-Netty/Netty EventLoop/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/05/08/blogs-Netty/Netty EventLoop/" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://segmentfault.com/a/1190000007403873" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007403873</a></p>
-
+<img src="/Netty/blogs-Netty/Netty与Spring%20Boot的整合/Netty实战思维导图.png" title="This is an image">
           
         
       

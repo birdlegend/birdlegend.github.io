@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="machine learning,deep learning,ANN," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="##  ANN人工神经网络。 参考文献 《机器学习》第4章 Tom M.Mitchell著 神经网络基础-Poll笔记 神经网络浅讲：从神经元到深度学习  神经网络组成1) 感知器(perceptron)2) 线性单元(linear unit)3) sigmoid单元(sigmoid unit) 感知器感知器的表征能力可以把感知器看作是n维实例空间（即点空间）的超平面决策面。  仅有两层深度的">
+<meta name="keywords" content="machine learning,deep learning,ANN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ANN学习">
+<meta property="og:url" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/ANN学习.html">
+<meta property="og:site_name" content="birdlegend的博客">
+<meta property="og:description" content="##  ANN人工神经网络。 参考文献 《机器学习》第4章 Tom M.Mitchell著 神经网络基础-Poll笔记 神经网络浅讲：从神经元到深度学习  神经网络组成1) 感知器(perceptron)2) 线性单元(linear unit)3) sigmoid单元(sigmoid unit) 感知器感知器的表征能力可以把感知器看作是n维实例空间（即点空间）的超平面决策面。  仅有两层深度的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/人工神经网络结构图.png">
+<meta property="og:image" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/ANN学习/神经网络训练过程图.gif">
+<meta property="og:updated_time" content="2018-07-20T09:27:57.210Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ANN学习">
+<meta name="twitter:description" content="##  ANN人工神经网络。 参考文献 《机器学习》第4章 Tom M.Mitchell著 神经网络基础-Poll笔记 神经网络浅讲：从神经元到深度学习  神经网络组成1) 感知器(perceptron)2) 线性单元(linear unit)3) sigmoid单元(sigmoid unit) 感知器感知器的表征能力可以把感知器看作是n维实例空间（即点空间）的超平面决策面。  仅有两层深度的">
+<meta name="twitter:image" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/人工神经网络结构图.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/ANN学习.html"/>
+
+
+
+
+
+  <title>ANN学习 | birdlegend的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">birdlegend的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+  </div>
+
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/ANN学习.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">ANN学习</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T10:13:37+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">machine learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/machine-learning/deep-learning/" itemprop="url" rel="index">
+                    <span itemprop="name">deep learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/machine-learning/deep-learning/blogs-机器学习/ANN学习.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/ANN学习.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>## </p>
+<p>ANN人工神经网络。</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ol>
+<li>《机器学习》第4章 Tom M.Mitchell著</li>
+<li><a href="http://www.cnblogs.com/maybe2030/p/5597716.html" target="_blank" rel="noopener">神经网络基础-Poll笔记</a></li>
+<li><a href="http://www.cnblogs.com/subconscious/p/5058741.html" target="_blank" rel="noopener">神经网络浅讲：从神经元到深度学习</a></li>
+</ol>
+<h2 id="神经网络组成"><a href="#神经网络组成" class="headerlink" title="神经网络组成"></a>神经网络组成</h2><p>1) 感知器(perceptron)<br>2) 线性单元(linear unit)<br>3) sigmoid单元(sigmoid unit)</p>
+<h2 id="感知器"><a href="#感知器" class="headerlink" title="感知器"></a>感知器</h2><h3 id="感知器的表征能力"><a href="#感知器的表征能力" class="headerlink" title="感知器的表征能力"></a>感知器的表征能力</h3><p>可以把感知器看作是n维实例空间（即点空间）的超平面决策面。</p>
+<blockquote>
+<p>仅有两层深度的感知器网络就可以表示所有的布尔函数，在这些网络中输入被送到多个单元，这些单元的输出被输入到第二级，也是最后一级。</p>
+</blockquote>
+<h3 id="感知器学习权向量"><a href="#感知器学习权向量" class="headerlink" title="感知器学习权向量"></a>感知器学习权向量</h3><p>学习任务是决定一个权向量，它可以使感知器对于给定的训练样例输出正确的1或-1。</p>
+<ul>
+<li><p>分类：  </p>
+<ol>
+<li><p>感知器训练法则</p>
+</li>
+<li><p>增量法则（delta法则）</p>
+<p>根据输入的非阈值化线性组合的误差来更新权。  </p>
+</li>
+</ol>
+</li>
+<li><p>区别</p>
+<ol>
+<li>误差类型：感知器训练法则根据阈值化的感知器==输出的误差==更新权值，delta法则根据输入的非阈值化==线性组合的误差==来更新权。  </li>
+<li>收敛性：感知器训练法则经过有限次的迭代收敛到一个能离线分类训练数据的假设，但条件必须是训练样例线性可分。而增量法则渐进到最小误差假设，可能需要很长时间，但无论训练样例是否线性可分都收敛。</li>
+</ol>
+</li>
+</ul>
+<h4 id="感知器训练法则"><a href="#感知器训练法则" class="headerlink" title="感知器训练法则"></a>感知器训练法则</h4><ul>
+<li><p>公式</p>
+<p>$ w_{i} \leftarrow w_{i} + \Delta w_{i}$</p>
+<p>其中： $\Delta w_{i} = \eta(t-o)x_{i}$</p>
+</li>
+</ul>
+<ul>
+<li>适用范围：<ol>
+<li>训练样例线性可分，如果不可分则无法收敛。</li>
+<li>只适用于单神经元的场合。</li>
+</ol>
+</li>
+</ul>
+<h4 id="梯度下降和delta法则"><a href="#梯度下降和delta法则" class="headerlink" title="梯度下降和delta法则"></a>梯度下降和delta法则</h4><ul>
+<li><p>概念</p>
+<p>delta的关键思想是使用==梯度下降(gradient descent)==来搜索可能的权向量的假设空间，以找到最佳拟合训练样例的权向量。</p>
+<p>需要指定一个度量标准来衡量假设（权向量）相对于训练样例的训练误差。常用度量标准：</p>
+<p>$$ E(\overline{w}) \equiv \frac{1}{2} \sum_{d\in D}(t_d - o_d)^2$$</p>
+<p>其中, D为训练用例集合，$t_d$是训练样例d的目标输出。$o_d$是线性单元对训练样例d的输出。</p>
+</li>
+<li><p>梯度下降权值更新法则</p>
+<p>公式：$\Delta w_i = \eta \sum_{d \in D}(t_d-o_d)x_{id} $</p>
+<p>梯度下降适用情况：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1)假设空间包含连续参数化的假设。</span><br><span class="line">2)误差对于这些假设可微。</span><br></pre></td></tr></table></figure>
+<p>梯度下降存在问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1) 有时收敛过程非常慢</span><br><span class="line">2）有时在误差曲面上有多个局部极小值，不能保证这个过程会找到全局最小值。</span><br></pre></td></tr></table></figure>
+<p>优化方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">增量梯度下降</span><br><span class="line">随机梯度下降</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>适用范围：</p>
+<ol>
+<li>训练样例线性不可分。</li>
+<li>只适用于单层的感知器。</li>
+</ol>
+</li>
+</ul>
+<h2 id="多层网络和反向传播算法"><a href="#多层网络和反向传播算法" class="headerlink" title="多层网络和反向传播算法"></a>多层网络和反向传播算法</h2><p><img src="人工神经网络结构图.png" alt="人工神经网络结构图"></p>
+<img src="/machine-learning/deep-learning/blogs-机器学习/ANN学习/神经网络训练过程图.gif" title="神经网络训练过程图">
+<h3 id="Step1-前向传播"><a href="#Step1-前向传播" class="headerlink" title="Step1 前向传播"></a>Step1 前向传播</h3><p>需要先对w1、w2…、w8取初始值，为随机数。</p>
+<h4 id="1-输入层—-gt-隐含层"><a href="#1-输入层—-gt-隐含层" class="headerlink" title="1. 输入层—&gt;隐含层"></a>1. 输入层—&gt;隐含层</h4><h4 id="2-隐含层—-gt-到出层"><a href="#2-隐含层—-gt-到出层" class="headerlink" title="2. 隐含层—&gt;到出层"></a>2. 隐含层—&gt;到出层</h4><h3 id="Step2-反向传播"><a href="#Step2-反向传播" class="headerlink" title="Step2 反向传播"></a>Step2 反向传播</h3><h4 id="1-计算总误差"><a href="#1-计算总误差" class="headerlink" title="1.计算总误差"></a>1.计算总误差</h4><h4 id="2-隐含层—-gt-输出层的权值更新"><a href="#2-隐含层—-gt-输出层的权值更新" class="headerlink" title="2.隐含层—&gt;输出层的权值更新"></a>2.隐含层—&gt;输出层的权值更新</h4><h4 id="3-隐含层—-gt-隐含层的权值更新"><a href="#3-隐含层—-gt-隐含层的权值更新" class="headerlink" title="3.隐含层—&gt;隐含层的权值更新"></a>3.隐含层—&gt;隐含层的权值更新</h4><h2 id="权值和偏置函数"><a href="#权值和偏置函数" class="headerlink" title="权值和偏置函数"></a>权值和偏置函数</h2><blockquote>
+<p><a href="https://blog.csdn.net/xwd18280820053/article/details/70681750" target="_blank" rel="noopener">神经网络中w,b参数的作用（为何需要偏置b的解释）</a></p>
+</blockquote>
+<h2 id="感知机和多层感知机"><a href="#感知机和多层感知机" class="headerlink" title="感知机和多层感知机"></a>感知机和多层感知机</h2><h4 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h4><p><a href="http://www.cnblogs.com/dinghing154/p/6129307.html" target="_blank" rel="noopener">http://www.cnblogs.com/dinghing154/p/6129307.html</a></p>
+<ul>
+<li><a href="http://www.cnblogs.com/dinghing154/p/6130803.html" target="_blank" rel="noopener">简单的感知机的使用界限</a><br>这篇介绍了多层感知机进行XOR运算的过程。</li>
+<li><a href="https://blog.csdn.net/u014475479/article/details/78650635" target="_blank" rel="noopener">多层感知机</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+          
+            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
+          
+            <a href="/tags/ANN/" rel="tag"># ANN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/hexo/blogs-hexo/git和hexo搭建博客教程集合.html" rel="next" title="git和hexo搭建博客教程集合">
+                <i class="fa fa-chevron-left"></i> git和hexo搭建博客教程集合
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/machine-learning/blogs-机器学习/短期时序序列预测/短期时序序列预测.html" rel="prev" title="RNN学习">
+                RNN学习 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="birdlegend" />
+          <p class="site-author-name" itemprop="name">birdlegend</p>
+           
+              <p class="site-description motion-element" itemprop="description">这是birdlegend的博客</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络组成"><span class="nav-number">2.</span> <span class="nav-text">神经网络组成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知器"><span class="nav-number">3.</span> <span class="nav-text">感知器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知器的表征能力"><span class="nav-number">3.1.</span> <span class="nav-text">感知器的表征能力</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知器学习权向量"><span class="nav-number">3.2.</span> <span class="nav-text">感知器学习权向量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知器训练法则"><span class="nav-number">3.2.1.</span> <span class="nav-text">感知器训练法则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降和delta法则"><span class="nav-number">3.2.2.</span> <span class="nav-text">梯度下降和delta法则</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多层网络和反向传播算法"><span class="nav-number">4.</span> <span class="nav-text">多层网络和反向传播算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Step1-前向传播"><span class="nav-number">4.1.</span> <span class="nav-text">Step1 前向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-输入层—-gt-隐含层"><span class="nav-number">4.1.1.</span> <span class="nav-text">1. 输入层—&gt;隐含层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-隐含层—-gt-到出层"><span class="nav-number">4.1.2.</span> <span class="nav-text">2. 隐含层—&gt;到出层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Step2-反向传播"><span class="nav-number">4.2.</span> <span class="nav-text">Step2 反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-计算总误差"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.计算总误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-隐含层—-gt-输出层的权值更新"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.隐含层—&gt;输出层的权值更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-隐含层—-gt-隐含层的权值更新"><span class="nav-number">4.2.3.</span> <span class="nav-text">3.隐含层—&gt;隐含层的权值更新</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#权值和偏置函数"><span class="nav-number">5.</span> <span class="nav-text">权值和偏置函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#感知机和多层感知机"><span class="nav-number">6.</span> <span class="nav-text">感知机和多层感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机"><span class="nav-number">6.0.1.</span> <span class="nav-text">感知机</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">birdlegend</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Gemini
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

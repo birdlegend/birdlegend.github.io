@@ -328,7 +328,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/28/blogs-hexo/git和hexo搭建博客教程集合/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/hexo/blogs-hexo/git和hexo搭建博客教程集合.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -347,7 +347,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/28/blogs-hexo/git和hexo搭建博客教程集合/" itemprop="url">git和hexo搭建博客教程集合</a></h1>
+                <a class="post-title-link" href="/hexo/blogs-hexo/git和hexo搭建博客教程集合.html" itemprop="url">git和hexo搭建博客教程集合</a></h1>
         
 
         <div class="post-meta">
@@ -400,8 +400,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/28/blogs-hexo/git和hexo搭建博客教程集合/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/04/28/blogs-hexo/git和hexo搭建博客教程集合/" itemprop="commentCount">0</span> comments
+                <a href="/hexo/blogs-hexo/git和hexo搭建博客教程集合.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/hexo/blogs-hexo/git和hexo搭建博客教程集合.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -432,6 +432,14 @@
         
           
             <h4 id="Gitee-Hexo搭建个人博客"><a href="#Gitee-Hexo搭建个人博客" class="headerlink" title="Gitee+Hexo搭建个人博客"></a><a href="http://yov.oschina.io/article/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/Tool/Gitee+Hexo%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/index.html" target="_blank" rel="noopener">Gitee+Hexo搭建个人博客</a></h4><p><a href="http://forsweet.github.io/hexo/%E7%94%A8Hexo%E6%90%AD%E5%BB%BAGithub%E5%8D%9A%E5%AE%A2/" target="_blank" rel="noopener">用Hexo 3 搭建github blog</a></p>
+<h4 id="Hexo图片显示-typora工具辅助"><a href="#Hexo图片显示-typora工具辅助" class="headerlink" title="Hexo图片显示(typora工具辅助)"></a>Hexo图片显示(typora工具辅助)</h4><p>配置博客文件的所有图片存储到博客当前路径的同名文件夹中。</p>
+<p>1) _config.yml文件修改配置</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+<p>2) typora在md文件中增加配置</p>
+<p>配置typora，以使文件的所有图片都存储到当前路径的同名文件夹中。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">typora-copy-images-to: ./博客名</span><br></pre></td></tr></table></figure>
+<p>3)  图片展示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片说明](图片.jpg)</span><br></pre></td></tr></table></figure>
 <h4 id="Hexo使用攻略-添加分类及标签"><a href="#Hexo使用攻略-添加分类及标签" class="headerlink" title="Hexo使用攻略-添加分类及标签"></a><a href="https://www.jianshu.com/p/e17711e44e00" target="_blank" rel="noopener">Hexo使用攻略-添加分类及标签</a></h4><h4 id="Hexo之next主题设置首页不显示全文-只显示预览"><a href="#Hexo之next主题设置首页不显示全文-只显示预览" class="headerlink" title="Hexo之next主题设置首页不显示全文(只显示预览)"></a><a href="https://www.jianshu.com/p/393d067dba8d" target="_blank" rel="noopener">Hexo之next主题设置首页不显示全文(只显示预览)</a></h4><blockquote>
 <p>进入hexo博客项目的themes/next目录<br>用文本编辑器打开_config.yml文件<br>搜索”auto_excerpt”,找到如下部分：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto_excerpt:</span><br><span class="line">  enable: false</span><br><span class="line">  length: 150</span><br></pre></td></tr></table></figure></p>
 </blockquote>
@@ -441,9 +449,10 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">math:</span><br><span class="line">  engine: &apos;katex&apos; # or &apos;katex&apos;</span><br><span class="line">  mathjax:</span><br><span class="line">    src: custom_mathjax_source</span><br><span class="line">    config:</span><br><span class="line">      # MathJax config</span><br><span class="line">  katex:</span><br><span class="line">    css: custom_css_source</span><br><span class="line">    js: custom_js_source # not used</span><br><span class="line">    config:</span><br><span class="line">      # KaTeX config</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>修改主题配置文件 ./themes/next/_config.yml<br>修改配置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">mathjax:</span><br><span class="line">  enable: true</span><br><span class="line">  per_page: true</span><br><span class="line">  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">mathjax:</span><br><span class="line">  enable: true</span><br><span class="line">  per_page: true</span><br><span class="line">  cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-
+<h4 id="HEXO的站内链接和永久链接"><a href="#HEXO的站内链接和永久链接" class="headerlink" title="HEXO的站内链接和永久链接"></a><a href="http://www.wuliaole.com/post/permalink_and_internal_link_in_hexo/" target="_blank" rel="noopener">HEXO的站内链接和永久链接</a></h4>
           
         
       
@@ -491,7 +500,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/04/27/blogs-机器学习/LSTM和循环网络基础教程/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/LSTM和循环网络基础教程.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -510,7 +519,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/04/27/blogs-机器学习/LSTM和循环网络基础教程/" itemprop="url">LSTM和循环网络基础教程</a></h1>
+                <a class="post-title-link" href="/machine-learning/deep-learning/blogs-机器学习/LSTM和循环网络基础教程.html" itemprop="url">LSTM和循环网络基础教程</a></h1>
         
 
         <div class="post-meta">
@@ -574,8 +583,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/04/27/blogs-机器学习/LSTM和循环网络基础教程/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/2018/04/27/blogs-机器学习/LSTM和循环网络基础教程/" itemprop="commentCount">0</span> comments
+                <a href="/machine-learning/deep-learning/blogs-机器学习/LSTM和循环网络基础教程.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/LSTM和循环网络基础教程.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
