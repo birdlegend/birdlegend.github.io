@@ -104,7 +104,7 @@
 <meta name="description" content="这是birdlegend的博客">
 <meta property="og:type" content="website">
 <meta property="og:title" content="birdlegend的博客">
-<meta property="og:url" content="http://yoursite.com/tags/JVM/index.html">
+<meta property="og:url" content="http://yoursite.com/tags/jvm/index.html">
 <meta property="og:site_name" content="birdlegend的博客">
 <meta property="og:description" content="这是birdlegend的博客">
 <meta property="og:locale" content="zh-Hans">
@@ -139,14 +139,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/JVM/"/>
+  <link rel="canonical" href="http://yoursite.com/tags/jvm/"/>
 
 
 
 
 
 
-  <title>标签: JVM | birdlegend的博客</title>
+  <title>标签: jvm | birdlegend的博客</title>
   
 
 
@@ -321,7 +321,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>JVM<small>标签</small>
+        <h1>jvm<small>标签</small>
         </h1>
       </div>
 
@@ -333,37 +333,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html" itemprop="url">
+            <a class="post-title-link" href="/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html" itemprop="url">
               
-                <span itemprop="name">7 虚拟机类加载的机制</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-05T15:02:54+08:00"
-              content="2018-09-05" >
-          09-05
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html" itemprop="url">
-              
-                <span itemprop="name">6.4字节码指令简介</span>
+                <span itemprop="name">JVM运行机制</span>
               
             </a>
         
@@ -371,65 +343,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-04T20:31:49+08:00"
-              content="2018-09-04" >
-          09-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html" itemprop="url">
-              
-                <span itemprop="name">6.3 Class类文件的结构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-04T15:55:30+08:00"
-              content="2018-09-04" >
-          09-04
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html" itemprop="url">
-              
-                <span itemprop="name">6.3.2 常量池</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-09-04T15:12:37+08:00"
-              content="2018-09-04" >
-          09-04
+              datetime="2018-07-23T11:19:19+08:00"
+              content="2018-07-23" >
+          07-23
         </time>
       </div>
 
@@ -489,7 +405,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-count">28</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -960,6 +876,100 @@
               resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
             } else if (resultItems.length === 0) {
               resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.2"></script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
+frown-o fa-5x" /></div>'
             } else {
               resultItems.sort(function (resultLeft, resultRight) {
                 if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
