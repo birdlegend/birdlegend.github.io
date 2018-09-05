@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="6.4字节码指令简介指令分类1234567891011graph LR;types(指令分类)--&amp;gt;ls(加载和存储指令);types--&amp;gt;calc(运算指令);types--&amp;gt;tc(类型转换指令);types--&amp;gt;na(对象创建与访问指令);types--&amp;gt;sm(操作数栈管理指令);types--&amp;gt;ct(控制转移指令);types--&amp;gt;fir(方法调用和">
+<meta name="description" content="6.4字节码指令简介指令分类graph LR; types(指令分类)--&amp;gt;ls(加载和存储指令); types--&amp;gt;calc(运算指令); types--&amp;gt;tc(类型转换指令); types--&amp;gt;na(对象创建与访问指令); types--&amp;gt;sm(操作数栈管理指令); types--&amp;gt;ct(控制转移指令); types--&amp;gt;fir(方法调用和返回指令); types--&amp;gt;exception(异常">
 <meta name="keywords" content="java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.4字节码指令简介">
 <meta property="og:url" content="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html">
 <meta property="og:site_name" content="birdlegend的博客">
-<meta property="og:description" content="6.4字节码指令简介指令分类1234567891011graph LR;types(指令分类)--&amp;gt;ls(加载和存储指令);types--&amp;gt;calc(运算指令);types--&amp;gt;tc(类型转换指令);types--&amp;gt;na(对象创建与访问指令);types--&amp;gt;sm(操作数栈管理指令);types--&amp;gt;ct(控制转移指令);types--&amp;gt;fir(方法调用和">
+<meta property="og:description" content="6.4字节码指令简介指令分类graph LR; types(指令分类)--&amp;gt;ls(加载和存储指令); types--&amp;gt;calc(运算指令); types--&amp;gt;tc(类型转换指令); types--&amp;gt;na(对象创建与访问指令); types--&amp;gt;sm(操作数栈管理指令); types--&amp;gt;ct(控制转移指令); types--&amp;gt;fir(方法调用和返回指令); types--&amp;gt;exception(异常">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-09-05T08:51:36.080Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6.4字节码指令简介">
-<meta name="twitter:description" content="6.4字节码指令简介指令分类1234567891011graph LR;types(指令分类)--&amp;gt;ls(加载和存储指令);types--&amp;gt;calc(运算指令);types--&amp;gt;tc(类型转换指令);types--&amp;gt;na(对象创建与访问指令);types--&amp;gt;sm(操作数栈管理指令);types--&amp;gt;ct(控制转移指令);types--&amp;gt;fir(方法调用和">
+<meta name="twitter:description" content="6.4字节码指令简介指令分类graph LR; types(指令分类)--&amp;gt;ls(加载和存储指令); types--&amp;gt;calc(运算指令); types--&amp;gt;tc(类型转换指令); types--&amp;gt;na(对象创建与访问指令); types--&amp;gt;sm(操作数栈管理指令); types--&amp;gt;ct(控制转移指令); types--&amp;gt;fir(方法调用和返回指令); types--&amp;gt;exception(异常">
 
 
 
@@ -451,7 +451,18 @@
       
 
       
-        <h2 id="6-4字节码指令简介"><a href="#6-4字节码指令简介" class="headerlink" title="6.4字节码指令简介"></a>6.4字节码指令简介</h2><h3 id="指令分类"><a href="#指令分类" class="headerlink" title="指令分类"></a>指令分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">types(指令分类)--&gt;ls(加载和存储指令);</span><br><span class="line">types--&gt;calc(运算指令);</span><br><span class="line">types--&gt;tc(类型转换指令);</span><br><span class="line">types--&gt;na(对象创建与访问指令);</span><br><span class="line">types--&gt;sm(操作数栈管理指令);</span><br><span class="line">types--&gt;ct(控制转移指令);</span><br><span class="line">types--&gt;fir(方法调用和返回指令);</span><br><span class="line">types--&gt;exception(异常处理指令);</span><br><span class="line">types--&gt;sync(同步指令);</span><br><span class="line">sync-.-&gt;sync-des&gt;&quot;Java虚拟机可以支持方法级的同步和方法内部一段指令序列的同步；&lt;br&gt;这两种同步结构都是使用&lt;b&gt;管程(Monitor)&lt;/b&gt;来支持&quot;];</span><br></pre></td></tr></table></figure>
+        <h2 id="6-4字节码指令简介"><a href="#6-4字节码指令简介" class="headerlink" title="6.4字节码指令简介"></a>6.4字节码指令简介</h2><h3 id="指令分类"><a href="#指令分类" class="headerlink" title="指令分类"></a>指令分类</h3><pre class="mermaid">graph LR;
+types(指令分类)-->ls(加载和存储指令);
+types-->calc(运算指令);
+types-->tc(类型转换指令);
+types-->na(对象创建与访问指令);
+types-->sm(操作数栈管理指令);
+types-->ct(控制转移指令);
+types-->fir(方法调用和返回指令);
+types-->exception(异常处理指令);
+types-->sync(同步指令);
+sync-.->sync-des>"Java虚拟机可以支持方法级的同步和方法内部一段指令序列的同步；<br>这两种同步结构都是使用<b>管程(Monitor)</b>来支持"];</pre>
+
 <hr>
 <blockquote>
 <p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
@@ -577,7 +588,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

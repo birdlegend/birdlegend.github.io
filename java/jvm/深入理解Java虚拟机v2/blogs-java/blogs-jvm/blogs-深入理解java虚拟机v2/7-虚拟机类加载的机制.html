@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
+<meta name="description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期graph LR; ld(加载Loading)--&amp;gt;verif(验证Verification); subgraph 连接Linking; verif--&amp;gt;prep(准备Preparation); prep--">
 <meta name="keywords" content="java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7 虚拟机类加载的机制">
 <meta property="og:url" content="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html">
 <meta property="og:site_name" content="birdlegend的博客">
-<meta property="og:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
+<meta property="og:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期graph LR; ld(加载Loading)--&amp;gt;verif(验证Verification); subgraph 连接Linking; verif--&amp;gt;prep(准备Preparation); prep--">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-09-05T08:49:09.796Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="7 虚拟机类加载的机制">
-<meta name="twitter:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
+<meta name="twitter:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期graph LR; ld(加载Loading)--&amp;gt;verif(验证Verification); subgraph 连接Linking; verif--&amp;gt;prep(准备Preparation); prep--">
 
 
 
@@ -454,13 +454,27 @@
         <h2 id="虚拟机类加载的机制"><a href="#虚拟机类加载的机制" class="headerlink" title="虚拟机类加载的机制"></a>虚拟机类加载的机制</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
 <p>虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。</p>
 </blockquote>
-<h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">ld(加载&lt;br&gt;Loading)--&gt;verif(验证&lt;br&gt;Verification);</span><br><span class="line">subgraph 连接Linking;</span><br><span class="line">verif--&gt;prep(准备&lt;br&gt;Preparation);</span><br><span class="line">prep--&gt;reso(解析&lt;br&gt;Resolution);</span><br><span class="line">end;</span><br><span class="line">reso--&gt;init(初始化&lt;br&gt;Initialiization);</span><br><span class="line">init--&gt;using(使用&lt;br&gt;using);</span><br><span class="line">using--&gt;unload(卸载&lt;br&gt;unloading);</span><br></pre></td></tr></table></figure>
+<h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><pre class="mermaid">graph LR;
+ld(加载<br>Loading)-->verif(验证<br>Verification);
+subgraph 连接Linking;
+verif-->prep(准备<br>Preparation);
+prep-->reso(解析<br>Resolution);
+end;
+reso-->init(初始化<br>Initialiization);
+init-->using(使用<br>using);
+using-->unload(卸载<br>unloading);</pre>
+
 <h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><ol>
 <li>通过一个<strong>类的全限定名</strong>来获取定义此类的<strong>二进制字节流</strong>。</li>
 <li>将这个字节流所代表的<strong>静态存储结构</strong>转化为<strong>方法区的运行时数据结构</strong>。</li>
 <li>在内存中生成一个代表这个类的<em>java.lang.Class</em>对象，作为方法区这个类的所有数据的<strong>访问入口</strong>。</li>
 </ol>
-<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">ver(类验证)--&gt;file(文件格式验证);</span><br><span class="line">ver--&gt;meta(元数据验证);</span><br><span class="line">ver--&gt;bcode(字节码验证);</span><br><span class="line">ver--&gt;symb(符号引用验证)</span><br></pre></td></tr></table></figure>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><pre class="mermaid">graph TB;
+ver(类验证)-->file(文件格式验证);
+ver-->meta(元数据验证);
+ver-->bcode(字节码验证);
+ver-->symb(符号引用验证)</pre>
+
 <h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><blockquote>
 <p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都在方法区中进行分配。</p>
 </blockquote>
@@ -516,6 +530,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/uncategorized/test.html" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -592,7 +610,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

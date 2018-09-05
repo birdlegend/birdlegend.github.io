@@ -101,18 +101,18 @@
 
 
 
-<meta name="description" content="6.3.2 常量池 分类123456789graph LR;cp(常量池) --&amp;gt; literal(字面量);literal --&amp;gt; str(文本字符串);literal --&amp;gt; final(声明为final的全限定名);literal --&amp;gt; other(...);cp --&amp;gt; sr(符号引用);sr --&amp;gt; fqn(类和接口的全限定名);sr --&amp;gt;">
+<meta name="description" content="6.3.2 常量池 分类graph LR; cp(常量池) --&amp;gt; literal(字面量); literal --&amp;gt; str(文本字符串); literal --&amp;gt; final(声明为final的全限定名); literal --&amp;gt; other(...); cp --&amp;gt; sr(符号引用); sr --&amp;gt; fqn(类和接口的全限定名); sr --&amp;gt; fds(字段的名称和描述符); sr --&amp;gt;">
 <meta name="keywords" content="java,JVM">
 <meta property="og:type" content="article">
 <meta property="og:title" content="6.3.2 常量池">
 <meta property="og:url" content="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html">
 <meta property="og:site_name" content="birdlegend的博客">
-<meta property="og:description" content="6.3.2 常量池 分类123456789graph LR;cp(常量池) --&amp;gt; literal(字面量);literal --&amp;gt; str(文本字符串);literal --&amp;gt; final(声明为final的全限定名);literal --&amp;gt; other(...);cp --&amp;gt; sr(符号引用);sr --&amp;gt; fqn(类和接口的全限定名);sr --&amp;gt;">
+<meta property="og:description" content="6.3.2 常量池 分类graph LR; cp(常量池) --&amp;gt; literal(字面量); literal --&amp;gt; str(文本字符串); literal --&amp;gt; final(声明为final的全限定名); literal --&amp;gt; other(...); cp --&amp;gt; sr(符号引用); sr --&amp;gt; fqn(类和接口的全限定名); sr --&amp;gt; fds(字段的名称和描述符); sr --&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-09-04T07:58:07.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="6.3.2 常量池">
-<meta name="twitter:description" content="6.3.2 常量池 分类123456789graph LR;cp(常量池) --&amp;gt; literal(字面量);literal --&amp;gt; str(文本字符串);literal --&amp;gt; final(声明为final的全限定名);literal --&amp;gt; other(...);cp --&amp;gt; sr(符号引用);sr --&amp;gt; fqn(类和接口的全限定名);sr --&amp;gt;">
+<meta name="twitter:description" content="6.3.2 常量池 分类graph LR; cp(常量池) --&amp;gt; literal(字面量); literal --&amp;gt; str(文本字符串); literal --&amp;gt; final(声明为final的全限定名); literal --&amp;gt; other(...); cp --&amp;gt; sr(符号引用); sr --&amp;gt; fqn(类和接口的全限定名); sr --&amp;gt; fds(字段的名称和描述符); sr --&amp;gt;">
 
 
 
@@ -452,7 +452,16 @@
 
       
         <h2 id="6-3-2-常量池"><a href="#6-3-2-常量池" class="headerlink" title="6.3.2 常量池"></a>6.3.2 常量池</h2><hr>
-<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">cp(常量池) --&gt; literal(字面量);</span><br><span class="line">literal --&gt; str(文本字符串);</span><br><span class="line">literal --&gt; final(声明为final的全限定名);</span><br><span class="line">literal --&gt; other(...);</span><br><span class="line">cp --&gt; sr(符号引用);</span><br><span class="line">sr --&gt; fqn(类和接口的全限定名);</span><br><span class="line">sr --&gt; fds(字段的名称和描述符);</span><br><span class="line">sr --&gt; mds(方法的名称和描述符);</span><br></pre></td></tr></table></figure>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><pre class="mermaid">graph LR;
+cp(常量池) --> literal(字面量);
+literal --> str(文本字符串);
+literal --> final(声明为final的全限定名);
+literal --> other(...);
+cp --> sr(符号引用);
+sr --> fqn(类和接口的全限定名);
+sr --> fds(字段的名称和描述符);
+sr --> mds(方法的名称和描述符);</pre>
+
 <h3 id="常量池容量计数值-constant-pool-count"><a href="#常量池容量计数值-constant-pool-count" class="headerlink" title="常量池容量计数值(constant_pool_count)"></a>常量池容量计数值(constant_pool_count)</h3><ul>
 <li>u2类型的数据</li>
 <li>存放在常量池的入口处<em>（不在常量池中）</em></li>
@@ -591,7 +600,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

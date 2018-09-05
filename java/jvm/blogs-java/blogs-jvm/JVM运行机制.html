@@ -101,20 +101,20 @@
 
 
 
-<meta name="description" content="JVM运行机制JVM启动流程1234graph LR;    A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];    class A cssClass;    style B fill:#f9f,stroke:#333,stroke-width:4p">
+<meta name="description" content="JVM运行机制JVM启动流程graph LR;     A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];     class A cssClass;     style B fill:#f9f,stroke:#333,stroke-width:4px;  ​     JVM">
 <meta name="keywords" content="java,jvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM运行机制">
 <meta property="og:url" content="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html">
 <meta property="og:site_name" content="birdlegend的博客">
-<meta property="og:description" content="JVM运行机制JVM启动流程1234graph LR;    A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];    class A cssClass;    style B fill:#f9f,stroke:#333,stroke-width:4p">
+<meta property="og:description" content="JVM运行机制JVM启动流程graph LR;     A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];     class A cssClass;     style B fill:#f9f,stroke:#333,stroke-width:4px;  ​     JVM">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png">
 <meta property="og:image" content="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png">
 <meta property="og:updated_time" content="2018-07-24T03:58:34.647Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JVM运行机制">
-<meta name="twitter:description" content="JVM运行机制JVM启动流程1234graph LR;    A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];    class A cssClass;    style B fill:#f9f,stroke:#333,stroke-width:4p">
+<meta name="twitter:description" content="JVM运行机制JVM启动流程graph LR;     A[Java XXX] --&amp;gt; B[转载配置] --&amp;gt; C[根据配置寻找JVM.dll] --&amp;gt; D[初始化JVM获得JNIEnv接口] --&amp;gt; E[找到main方法];     class A cssClass;     style B fill:#f9f,stroke:#333,stroke-width:4px;  ​     JVM">
 <meta name="twitter:image" content="http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png">
 
 
@@ -445,7 +445,11 @@
       
         <p><img src="JVM运行机制/1532325494851.png" alt="1532325494851"></p>
 <img src="/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png" title="This is an example image">
-<h2 id="JVM运行机制"><a href="#JVM运行机制" class="headerlink" title="JVM运行机制"></a>JVM运行机制</h2><h3 id="JVM启动流程"><a href="#JVM启动流程" class="headerlink" title="JVM启动流程"></a>JVM启动流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">    A[Java XXX] --&gt; B[转载配置] --&gt; C[根据配置寻找JVM.dll] --&gt; D[初始化JVM获得JNIEnv接口] --&gt; E[找到main方法];</span><br><span class="line">    class A cssClass;</span><br><span class="line">    style B fill:#f9f,stroke:#333,stroke-width:4px;</span><br></pre></td></tr></table></figure>
+<h2 id="JVM运行机制"><a href="#JVM运行机制" class="headerlink" title="JVM运行机制"></a>JVM运行机制</h2><h3 id="JVM启动流程"><a href="#JVM启动流程" class="headerlink" title="JVM启动流程"></a>JVM启动流程</h3><pre class="mermaid">graph LR;
+    A[Java XXX] --> B[转载配置] --> C[根据配置寻找JVM.dll] --> D[初始化JVM获得JNIEnv接口] --> E[找到main方法];
+    class A cssClass;
+    style B fill:#f9f,stroke:#333,stroke-width:4px;</pre>
+
 <p>​    </p>
 <h2 id="JVM基本机构"><a href="#JVM基本机构" class="headerlink" title="JVM基本机构"></a>JVM基本机构</h2><h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><h2 id="编译和解释运行的概念"><a href="#编译和解释运行的概念" class="headerlink" title="编译和解释运行的概念"></a>编译和解释运行的概念</h2><style>
     .cssClass > rect{
@@ -580,7 +584,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-count">27</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
