@@ -109,7 +109,7 @@
 <meta property="og:site_name" content="birdlegend的博客">
 <meta property="og:description" content="深入理解Java基本数据类型char String.length() 得到的并不是字符的个数，而是 char[] 的长度，正确获得字符串中字符数量的方法是使用 String.codePointCount(int, int)，并传入 0 和 String.length()作为参数。  char 对应的包装类型为 Character，内部有一个 128 个元素的 Character 对象缓存，构造方法">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-23T08:10:25.384Z">
+<meta property="og:updated_time" content="2018-07-24T02:33:50.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="java基本数据类型">
 <meta name="twitter:description" content="深入理解Java基本数据类型char String.length() 得到的并不是字符的个数，而是 char[] 的长度，正确获得字符串中字符数量的方法是使用 String.codePointCount(int, int)，并传入 0 和 String.length()作为参数。  char 对应的包装类型为 Character，内部有一个 128 个元素的 Character 对象缓存，构造方法">
@@ -142,6 +142,7 @@
 
 
   <link rel="canonical" href="http://yoursite.com/java/blogs-java/java基本数据类型.html"/>
+
 
 
 
@@ -305,6 +306,7 @@
 
 
 
+
  </div>
     </header>
 
@@ -448,6 +450,10 @@
 <li>long -&gt; float, long -&gt; double</li>
 <li>float -&gt; double</li>
 </ul>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/java/blogs-java/java基本数据类型.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>
@@ -569,7 +575,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -580,7 +586,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -591,7 +597,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -668,6 +674,14 @@
   </a>
 </div>
 
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 

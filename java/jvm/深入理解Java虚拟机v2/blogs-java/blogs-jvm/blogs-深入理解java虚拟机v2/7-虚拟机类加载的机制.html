@@ -85,7 +85,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="machine learning,deep learning,RNN," />
+  <meta name="keywords" content="java,JVM," />
 
 
 
@@ -101,21 +101,18 @@
 
 
 
-<meta name="description" content="参考文献 7.循环神经网络(RNN) 基础讲解  简介 RNNs之所以称为循环神经网路，即一个序列当前的输出与前面的输出也有关。具体的表现形式为网络会对前面的信息进行记忆并应用于当前输出的计算中，即隐藏层之间的节点不再无连接而是有连接的，并且隐藏层的输入不仅包括输入层的输出还包括上一时刻隐藏层的输出。理论上，RNNs能够对任何长度的序列数据进行处理。  作者：_木豆_链接：https://www.">
-<meta name="keywords" content="machine learning,deep learning,RNN">
+<meta name="description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
+<meta name="keywords" content="java,JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="RNN学习">
-<meta property="og:url" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/RNN学习.html">
+<meta property="og:title" content="7 虚拟机类加载的机制">
+<meta property="og:url" content="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html">
 <meta property="og:site_name" content="birdlegend的博客">
-<meta property="og:description" content="参考文献 7.循环神经网络(RNN) 基础讲解  简介 RNNs之所以称为循环神经网路，即一个序列当前的输出与前面的输出也有关。具体的表现形式为网络会对前面的信息进行记忆并应用于当前输出的计算中，即隐藏层之间的节点不再无连接而是有连接的，并且隐藏层的输入不仅包括输入层的输出还包括上一时刻隐藏层的输出。理论上，RNNs能够对任何长度的序列数据进行处理。  作者：_木豆_链接：https://www.">
+<meta property="og:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/6162555-c241b388d93c7a3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554">
-<meta property="og:image" content="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/一个RNN的小例子.png">
-<meta property="og:updated_time" content="2018-07-20T09:27:57.210Z">
+<meta property="og:updated_time" content="2018-09-05T08:49:09.796Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="RNN学习">
-<meta name="twitter:description" content="参考文献 7.循环神经网络(RNN) 基础讲解  简介 RNNs之所以称为循环神经网路，即一个序列当前的输出与前面的输出也有关。具体的表现形式为网络会对前面的信息进行记忆并应用于当前输出的计算中，即隐藏层之间的节点不再无连接而是有连接的，并且隐藏层的输入不仅包括输入层的输出还包括上一时刻隐藏层的输出。理论上，RNNs能够对任何长度的序列数据进行处理。  作者：_木豆_链接：https://www.">
-<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/6162555-c241b388d93c7a3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554">
+<meta name="twitter:title" content="7 虚拟机类加载的机制">
+<meta name="twitter:description" content="虚拟机类加载的机制概念 虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。  类的生命周期123456789graph LR;ld(加载&amp;lt;br&amp;gt;Loading)--&amp;gt;verif(验证&amp;lt;br&amp;gt;Verification);subgraph 连接Linking;verif-">
 
 
 
@@ -144,14 +141,14 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/RNN学习.html"/>
+  <link rel="canonical" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html"/>
 
 
 
 
 
 
-  <title>RNN学习 | birdlegend的博客</title>
+  <title>7 虚拟机类加载的机制 | birdlegend的博客</title>
   
 
 
@@ -333,7 +330,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/RNN学习.html">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="birdlegend">
@@ -350,7 +347,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">RNN学习</h1>
+          <h1 class="post-title" itemprop="name headline">7 虚拟机类加载的机制</h1>
         
 
         <div class="post-meta">
@@ -362,8 +359,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-04T14:38:08+08:00">
-                2018-05-04
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-05T15:02:54+08:00">
+                2018-09-05
               </time>
             
 
@@ -385,8 +382,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -396,8 +393,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/deep-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">deep learning</span>
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/深入理解Java虚拟机v2/" itemprop="url" rel="index">
+                    <span itemprop="name">深入理解Java虚拟机v2</span>
                   </a>
                 </span>
 
@@ -414,8 +422,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/machine-learning/deep-learning/blogs-机器学习/RNN学习.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/deep-learning/blogs-机器学习/RNN学习.html" itemprop="commentCount">0</span> comments
+                <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html" itemprop="commentCount">0</span> comments
                 </a>
               </span>
             
@@ -443,22 +451,30 @@
       
 
       
-        <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
-<li><a href="https://www.jianshu.com/p/9f155515bdf0" target="_blank" rel="noopener">7.循环神经网络(RNN) 基础讲解</a></li>
-</ul>
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><blockquote>
-<p>RNNs之所以称为循环神经网路，即一个序列当前的输出与前面的输出也有关。具体的表现形式为网络会对前面的信息进行记忆并应用于当前输出的计算中，即隐藏层之间的节点不再无连接而是有连接的，并且隐藏层的输入不仅包括输入层的输出还包括上一时刻隐藏层的输出。理论上，RNNs能够对任何长度的序列数据进行处理。</p>
+        <h2 id="虚拟机类加载的机制"><a href="#虚拟机类加载的机制" class="headerlink" title="虚拟机类加载的机制"></a>虚拟机类加载的机制</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p>虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。</p>
 </blockquote>
-<p>作者：_木豆_<br>链接：<a href="https://www.jianshu.com/p/9f155515bdf0" target="_blank" rel="noopener">https://www.jianshu.com/p/9f155515bdf0</a><br>來源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
-<h2 id="RNN的基本结构"><a href="#RNN的基本结构" class="headerlink" title="RNN的基本结构"></a>RNN的基本结构</h2><blockquote>
-<p>RNNs包含输入单元(Input units)，输入集标记为{x0,x1,…,xt,xt+1,…}，而输出单元(Output units)的输出集则被标记为{y0,y1,…,yt,yt+1.,..}。RNNs还包含隐藏单元(Hidden units)，我们将其输出集标记为{h0,h1,…,ht,ht+1,…}，这些隐藏单元完成了最为主要的工作。<br>作者：_木豆_<br>链接：<a href="https://www.jianshu.com/p/9f155515bdf0" target="_blank" rel="noopener">https://www.jianshu.com/p/9f155515bdf0</a><br>來源：简书<br>著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">ld(加载&lt;br&gt;Loading)--&gt;verif(验证&lt;br&gt;Verification);</span><br><span class="line">subgraph 连接Linking;</span><br><span class="line">verif--&gt;prep(准备&lt;br&gt;Preparation);</span><br><span class="line">prep--&gt;reso(解析&lt;br&gt;Resolution);</span><br><span class="line">end;</span><br><span class="line">reso--&gt;init(初始化&lt;br&gt;Initialiization);</span><br><span class="line">init--&gt;using(使用&lt;br&gt;using);</span><br><span class="line">using--&gt;unload(卸载&lt;br&gt;unloading);</span><br></pre></td></tr></table></figure>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><ol>
+<li>通过一个<strong>类的全限定名</strong>来获取定义此类的<strong>二进制字节流</strong>。</li>
+<li>将这个字节流所代表的<strong>静态存储结构</strong>转化为<strong>方法区的运行时数据结构</strong>。</li>
+<li>在内存中生成一个代表这个类的<em>java.lang.Class</em>对象，作为方法区这个类的所有数据的<strong>访问入口</strong>。</li>
+</ol>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">ver(类验证)--&gt;file(文件格式验证);</span><br><span class="line">ver--&gt;meta(元数据验证);</span><br><span class="line">ver--&gt;bcode(字节码验证);</span><br><span class="line">ver--&gt;symb(符号引用验证)</span><br></pre></td></tr></table></figure>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><blockquote>
+<p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都在方法区中进行分配。</p>
 </blockquote>
-<p><img src="https://upload-images.jianshu.io/upload_images/6162555-c241b388d93c7a3c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/554" alt="RNN主要公式"></p>
-<p><img src="一个RNN的小例子.png" alt="一个RNN的小例子"></p>
-<h2 id="RNN确定"><a href="#RNN确定" class="headerlink" title="RNN确定"></a>RNN确定</h2><h4 id="梯度消失问题-gradient-vanish"><a href="#梯度消失问题-gradient-vanish" class="headerlink" title="梯度消失问题(gradient vanish)"></a>梯度消失问题(gradient vanish)</h4><ul>
-<li>采用 LSTM 解决梯度消失</li>
+<h4 id="clinit方法和ConstantValue属性"><a href="#clinit方法和ConstantValue属性" class="headerlink" title="clinit方法和ConstantValue属性"></a>clinit方法和ConstantValue属性</h4><ul>
+<li>clinit方法：类变量（static）初始化。</li>
+<li>ConstantValue属性：final类变量的初始化。</li>
 </ul>
-<h2 id="LSTM神经网络输入输出究竟是怎样的？"><a href="#LSTM神经网络输入输出究竟是怎样的？" class="headerlink" title="LSTM神经网络输入输出究竟是怎样的？"></a>LSTM神经网络输入输出究竟是怎样的？</h2><p><a href="https://www.zhihu.com/question/41949741?sort=created" target="_blank" rel="noopener">https://www.zhihu.com/question/41949741?sort=created</a></p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><blockquote>
+<p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
       
     </div>
@@ -476,11 +492,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/machine-learning/" rel="tag"># machine learning</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
-            <a href="/tags/deep-learning/" rel="tag"># deep learning</a>
-          
-            <a href="/tags/RNN/" rel="tag"># RNN</a>
+            <a href="/tags/JVM/" rel="tag"># JVM</a>
           
         </div>
       
@@ -493,8 +507,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/machine-learning/deep-learning/blogs-机器学习/ANN学习.html" rel="next" title="ANN学习">
-                <i class="fa fa-chevron-left"></i> ANN学习
+              <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html" rel="next" title="6.4字节码指令简介">
+                <i class="fa fa-chevron-left"></i> 6.4字节码指令简介
               </a>
             
           </div>
@@ -502,10 +516,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/machine-learning/blogs-机器学习/短期时序序列预测/短期时序序列预测.html" rel="prev" title="RNN学习">
-                RNN学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -639,7 +649,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#参考文献"><span class="nav-number">1.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">2.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN的基本结构"><span class="nav-number">3.</span> <span class="nav-text">RNN的基本结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RNN确定"><span class="nav-number">4.</span> <span class="nav-text">RNN确定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度消失问题-gradient-vanish"><span class="nav-number">4.0.1.</span> <span class="nav-text">梯度消失问题(gradient vanish)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LSTM神经网络输入输出究竟是怎样的？"><span class="nav-number">5.</span> <span class="nav-text">LSTM神经网络输入输出究竟是怎样的？</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#虚拟机类加载的机制"><span class="nav-number">1.</span> <span class="nav-text">虚拟机类加载的机制</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.1.</span> <span class="nav-text">概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类的生命周期"><span class="nav-number">1.2.</span> <span class="nav-text">类的生命周期</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载"><span class="nav-number">1.3.</span> <span class="nav-text">加载</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#概念-1"><span class="nav-number">1.3.1.</span> <span class="nav-text">概念</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证"><span class="nav-number">1.4.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#准备"><span class="nav-number">1.5.</span> <span class="nav-text">准备</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#clinit方法和ConstantValue属性"><span class="nav-number">1.5.1.</span> <span class="nav-text">clinit方法和ConstantValue属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析"><span class="nav-number">1.6.</span> <span class="nav-text">解析</span></a></li></ol></li></ol></div>
             
 
           </div>

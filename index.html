@@ -145,6 +145,7 @@
 
 
 
+
   <title>birdlegend的博客</title>
   
 
@@ -305,6 +306,7 @@
 
 
 
+
  </div>
     </header>
 
@@ -314,6 +316,753 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html" itemprop="url">7 虚拟机类加载的机制</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-05T15:02:54+08:00">
+                2018-09-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/深入理解Java虚拟机v2/" itemprop="url" rel="index">
+                    <span itemprop="name">深入理解Java虚拟机v2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="虚拟机类加载的机制"><a href="#虚拟机类加载的机制" class="headerlink" title="虚拟机类加载的机制"></a>虚拟机类加载的机制</h2><h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><blockquote>
+<p>虚拟机把类的数据从Class文件加载到内存中，并对数据进行校验、转换解析和初始化，最终形成可以被虚拟机直接使用的Java类型，这就是虚拟机的类加载机制。</p>
+</blockquote>
+<h3 id="类的生命周期"><a href="#类的生命周期" class="headerlink" title="类的生命周期"></a>类的生命周期</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">ld(加载&lt;br&gt;Loading)--&gt;verif(验证&lt;br&gt;Verification);</span><br><span class="line">subgraph 连接Linking;</span><br><span class="line">verif--&gt;prep(准备&lt;br&gt;Preparation);</span><br><span class="line">prep--&gt;reso(解析&lt;br&gt;Resolution);</span><br><span class="line">end;</span><br><span class="line">reso--&gt;init(初始化&lt;br&gt;Initialiization);</span><br><span class="line">init--&gt;using(使用&lt;br&gt;using);</span><br><span class="line">using--&gt;unload(卸载&lt;br&gt;unloading);</span><br></pre></td></tr></table></figure>
+<h3 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h3><h4 id="概念-1"><a href="#概念-1" class="headerlink" title="概念"></a>概念</h4><ol>
+<li>通过一个<strong>类的全限定名</strong>来获取定义此类的<strong>二进制字节流</strong>。</li>
+<li>将这个字节流所代表的<strong>静态存储结构</strong>转化为<strong>方法区的运行时数据结构</strong>。</li>
+<li>在内存中生成一个代表这个类的<em>java.lang.Class</em>对象，作为方法区这个类的所有数据的<strong>访问入口</strong>。</li>
+</ol>
+<h3 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">graph TB;</span><br><span class="line">ver(类验证)--&gt;file(文件格式验证);</span><br><span class="line">ver--&gt;meta(元数据验证);</span><br><span class="line">ver--&gt;bcode(字节码验证);</span><br><span class="line">ver--&gt;symb(符号引用验证)</span><br></pre></td></tr></table></figure>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><blockquote>
+<p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都在方法区中进行分配。</p>
+</blockquote>
+<h4 id="clinit方法和ConstantValue属性"><a href="#clinit方法和ConstantValue属性" class="headerlink" title="clinit方法和ConstantValue属性"></a>clinit方法和ConstantValue属性</h4><ul>
+<li>clinit方法：类变量（static）初始化。</li>
+<li>ConstantValue属性：final类变量的初始化。</li>
+</ul>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><blockquote>
+<p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程。</p>
+</blockquote>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/7-虚拟机类加载的机制.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html" itemprop="url">6.4字节码指令简介</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T20:31:49+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/深入理解Java虚拟机v2/" itemprop="url" rel="index">
+                    <span itemprop="name">深入理解Java虚拟机v2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="6-4字节码指令简介"><a href="#6-4字节码指令简介" class="headerlink" title="6.4字节码指令简介"></a>6.4字节码指令简介</h2><h3 id="指令分类"><a href="#指令分类" class="headerlink" title="指令分类"></a>指令分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">types(指令分类)--&gt;ls(加载和存储指令);</span><br><span class="line">types--&gt;calc(运算指令);</span><br><span class="line">types--&gt;tc(类型转换指令);</span><br><span class="line">types--&gt;na(对象创建与访问指令);</span><br><span class="line">types--&gt;sm(操作数栈管理指令);</span><br><span class="line">types--&gt;ct(控制转移指令);</span><br><span class="line">types--&gt;fir(方法调用和返回指令);</span><br><span class="line">types--&gt;exception(异常处理指令);</span><br><span class="line">types--&gt;sync(同步指令);</span><br><span class="line">sync-.-&gt;sync-des&gt;&quot;Java虚拟机可以支持方法级的同步和方法内部一段指令序列的同步；&lt;br&gt;这两种同步结构都是使用&lt;b&gt;管程(Monitor)&lt;/b&gt;来支持&quot;];</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-4字节码指令简介.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html" itemprop="url">6.3 Class类文件的结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T15:55:30+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/深入理解Java虚拟机v2/" itemprop="url" rel="index">
+                    <span itemprop="name">深入理解Java虚拟机v2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="6-3-Class类文件的结构"><a href="#6-3-Class类文件的结构" class="headerlink" title="6.3 Class类文件的结构"></a>6.3 Class类文件的结构</h2><hr>
+<h3 id="Class文件数据类型"><a href="#Class文件数据类型" class="headerlink" title="Class文件数据类型"></a>Class文件数据类型</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">ct(Class数据类型)--&gt;un(&quot;无符号数:u1、u2、...、u8，其中u1为1byte。&quot;);</span><br><span class="line">ct--&gt;tb(&quot;表: 由无符号数和其他表构成&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="Class-文件结构"><a href="#Class-文件结构" class="headerlink" title="Class 文件结构"></a>Class 文件结构</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">cs(Class类文件结构)--&gt;mn(1.魔数magic);</span><br><span class="line">cs--&gt;minv(2.minor version);</span><br><span class="line">cs--&gt;majv(3.major version);</span><br><span class="line">cs--&gt;cpc(4.constant pool count);</span><br><span class="line">cs--&gt;cp(5.constant pool);</span><br><span class="line">cs--&gt;af(6.access_flags);</span><br><span class="line">cs--&gt;tc(7.this_class);</span><br><span class="line">cs--&gt;sc(8.super_class);</span><br><span class="line">cs--&gt;ic(9.interfaces_count);</span><br><span class="line">cs--&gt;intf(10.interfaces);</span><br><span class="line">cs--&gt;fc(11.fields_count);</span><br><span class="line">cs--&gt;fields(12.fields);</span><br><span class="line">cs--&gt;mc(13.methods_count);</span><br><span class="line">cs--&gt;methods(14.methods);</span><br><span class="line">cs--&gt;ac(15.attributes_count);</span><br><span class="line">cs--&gt;attr(16.attributes);</span><br><span class="line"></span><br><span class="line">mn-.-&gt;mn-d1&gt;确定文件是否为一个能被虚拟机接收的class文件];</span><br><span class="line">af-.-&gt;af-d1&gt;&quot;识别一些类或者接口层次的访问信息,&lt;br&gt;如public、abstract、volatile、transient&quot;];</span><br><span class="line">tc-.-&gt;ci-des&gt;&quot;指向一个类型为CONSTANT_Class_info的类描述符常量，&lt;br/&gt;通过该常量中的索引值找到定义在&lt;br&gt;CONSTANT_Utf8_info类型的常量的全限定名字符串。&quot;];</span><br><span class="line">sc-.-&gt;ci-des;</span><br><span class="line">intf-.-&gt;ci-des;</span><br><span class="line">fields-.-&gt;fields-d1&gt;&quot;用于描述接口或类中声明的变量,&lt;br&gt;包括类级变量和实例级变量，&lt;br&gt;字段表结构：access_flags, name_index, descriptor_index&quot;];</span><br><span class="line">methods-.-&gt;method-d1&gt;&quot;方法表结构：&lt;br&gt;1. 访问标志(access_flags) 2.名称索引(name_index) &lt;br&gt;3.描述符索引(descriptor_index) 4.属性表集合(attributes)&quot;];</span><br><span class="line"></span><br><span class="line">mn-.-&gt;u4&gt;u4类型]</span><br><span class="line">minv-.-&gt;u2&gt;u2类型];</span><br><span class="line">majv-.-&gt;u2;</span><br><span class="line">cpc-.-&gt;u2;</span><br><span class="line">cp-.-&gt;cpinfo&gt;cp_info类型];</span><br><span class="line">tc-.-&gt;u2;</span><br><span class="line">sc-.-&gt;u2;</span><br><span class="line">ic-.-&gt;u2;</span><br><span class="line">intf-.-&gt;u2;</span><br><span class="line">fc-.-&gt;u2;</span><br><span class="line">fields-.-&gt;fdinfo&gt;field_info类型];</span><br><span class="line">mc-.-&gt;u2;</span><br><span class="line">methods-.-&gt;mdinfo&gt;method_info];</span><br><span class="line">ac-.-&gt;u2;</span><br><span class="line">attr-.-&gt;attrinfo&gt;attribute_info];</span><br></pre></td></tr></table></figure>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-Class类文件的结构.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="birdlegend">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="birdlegend的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html" itemprop="url">6.3.2 常量池</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T15:12:37+08:00">
+                2018-09-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/深入理解Java虚拟机v2/" itemprop="url" rel="index">
+                    <span itemprop="name">深入理解Java虚拟机v2</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html" itemprop="commentCount">0</span> comments
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="6-3-2-常量池"><a href="#6-3-2-常量池" class="headerlink" title="6.3.2 常量池"></a>6.3.2 常量池</h2><hr>
+<h3 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">cp(常量池) --&gt; literal(字面量);</span><br><span class="line">literal --&gt; str(文本字符串);</span><br><span class="line">literal --&gt; final(声明为final的全限定名);</span><br><span class="line">literal --&gt; other(...);</span><br><span class="line">cp --&gt; sr(符号引用);</span><br><span class="line">sr --&gt; fqn(类和接口的全限定名);</span><br><span class="line">sr --&gt; fds(字段的名称和描述符);</span><br><span class="line">sr --&gt; mds(方法的名称和描述符);</span><br></pre></td></tr></table></figure>
+<h3 id="常量池容量计数值-constant-pool-count"><a href="#常量池容量计数值-constant-pool-count" class="headerlink" title="常量池容量计数值(constant_pool_count)"></a>常量池容量计数值(constant_pool_count)</h3><ul>
+<li>u2类型的数据</li>
+<li>存放在常量池的入口处<em>（不在常量池中）</em></li>
+<li>从1开始计数</li>
+</ul>
+<h3 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h3><ul>
+<li><p>常量池中每一项常量都是一个表。</p>
+</li>
+<li><p>在JDK1.7后，总共有14种表。</p>
+</li>
+<li><p>表开始的第一位是一个u1类型的标志位，代表当前常量属于哪种常量类型。</p>
+</li>
+</ul>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/Java/JVM/深入理解Java虚拟机v2/blogs-java/blogs-jvm/blogs-深入理解java虚拟机v2/6-3-2-常量池.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -612,8 +1361,22 @@
         
           
             <p><img src="JVM运行机制/1532325494851.png" alt="1532325494851"></p>
-<p>test2</p>
 <img src="/java/jvm/blogs-java/blogs-jvm/JVM运行机制/1532325494851.png" title="This is an example image">
+<h2 id="JVM运行机制"><a href="#JVM运行机制" class="headerlink" title="JVM运行机制"></a>JVM运行机制</h2><h3 id="JVM启动流程"><a href="#JVM启动流程" class="headerlink" title="JVM启动流程"></a>JVM启动流程</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">graph LR;</span><br><span class="line">    A[Java XXX] --&gt; B[转载配置] --&gt; C[根据配置寻找JVM.dll] --&gt; D[初始化JVM获得JNIEnv接口] --&gt; E[找到main方法];</span><br><span class="line">    class A cssClass;</span><br><span class="line">    style B fill:#f9f,stroke:#333,stroke-width:4px;</span><br></pre></td></tr></table></figure>
+<p>​    </p>
+<h2 id="JVM基本机构"><a href="#JVM基本机构" class="headerlink" title="JVM基本机构"></a>JVM基本机构</h2><h2 id="内存模型"><a href="#内存模型" class="headerlink" title="内存模型"></a>内存模型</h2><h2 id="编译和解释运行的概念"><a href="#编译和解释运行的概念" class="headerlink" title="编译和解释运行的概念"></a>编译和解释运行的概念</h2><style>
+    .cssClass > rect{
+        fill:red;
+        stroke:#FFFF00;
+        stroke-width:4px;
+    }
+</style>
+
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/java/jvm/blogs-java/blogs-jvm/JVM运行机制.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
+
           
         
       
@@ -785,6 +1548,10 @@
 <li>long -&gt; float, long -&gt; double</li>
 <li>float -&gt; double</li>
 </ul>
+<hr>
+<blockquote>
+<p><strong>本文作者：</strong> birdlegend<br><strong>本文链接：</strong> http://yoursite.com/java/blogs-java/java基本数据类型.html<br><strong>版权声明：</strong> 本博客所有文章除特别声明外，均采用 CC BY-NC-SA 3.0 许可协议。转载请注明出处！</p>
+</blockquote>
 
           
         
@@ -1332,623 +2099,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="birdlegend">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="birdlegend的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html" itemprop="url">多标签分类、多任务分类、多输出回归概念</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-13T10:58:05+08:00">
-                2018-05-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/blogs-机器学习/多标签分类、多任务分类、多输出回归概念.html" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>多类分类(Multiclass classification): 表示分类任务中有多个类别, 比如对一堆水果图片分类, 它们可能是橘子、苹果、梨等. 多类分类是假设每个样本都被设置了一个且仅有一个标签: 一个水果可以是苹果或者梨, 但是同时不可能是两者</p>
-<p>多标签分类(Multilabel classification): 给每个样本一系列的目标标签. 可以想象成一个数据点的各属性不是相互排斥的(一个水果既是苹果又是梨就是相互排斥的), 比如一个文档相关的话题. 一个文本可能被同时认为是宗教、政治、金融或者教育相关话题.</p>
-<p>多输出回归(Multioutput classification): 给每个样本一系列的目标值. 可以被想象成对每个数据点预测多个属性, 比如在某个定位的风向和风速</p>
-<p>多输出-多分类分类(Multioutput-multiclass classification) 和 多任务分类(Multi-task classification):意味着一个单一的评估器需要处理多个联合分类任务. 这是多标签分类任务(只考虑二院分类)和多类分类任务的推广, 输出格式是2d阵列.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">每一个输出变量的标签机可以是不同的. 比如一个样本的第一输出变量可以是有限类别中是pear的概率值, 第二个输出变量可能是有限颜色中是blue或者green的概率.  </span><br><span class="line">这意味着任意的支持多输出多类或者多任务分类任务的分类器, 均支持作为一种特殊情况的多标签分类任务. 多任务分类与多输出分类任务相似, 但是有不同的模型公式.</span><br></pre></td></tr></table></figure>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Netty/blogs-Netty/Netty EventLoop.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="birdlegend">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="birdlegend的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Netty/blogs-Netty/Netty EventLoop.html" itemprop="url">Netty EventLoop</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:31:27+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Netty/" itemprop="url" rel="index">
-                    <span itemprop="name">Netty</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/Netty/blogs-Netty/Netty EventLoop.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Netty/blogs-Netty/Netty EventLoop.html" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://segmentfault.com/a/1190000007403873" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007403873</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/machine-learning/blogs-机器学习/数据预处理.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="birdlegend">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="birdlegend的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/machine-learning/blogs-机器学习/数据预处理.html" itemprop="url">数据预处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:31:27+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/machine-learning/" itemprop="url" rel="index">
-                    <span itemprop="name">machine learning</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/machine-learning/blogs-机器学习/数据预处理.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/machine-learning/blogs-机器学习/数据预处理.html" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <ul>
-<li><p><a href="https://blog.csdn.net/dulingtingzi/article/details/51374487" target="_blank" rel="noopener">one hot 编码及数据归一化</a></p>
-</li>
-<li><p><a href="https://www.quora.com/What-are-good-ways-to-handle-discrete-and-continuous-inputs-together" target="_blank" rel="noopener">What are good ways to handle discrete and continuous inputs together?</a></p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/Netty/blogs-Netty/Netty与Spring Boot的整合.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="birdlegend">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="birdlegend的博客">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/Netty/blogs-Netty/Netty与Spring Boot的整合.html" itemprop="url">Netty与Spring Boot的整合</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-08T14:31:27+08:00">
-                2018-05-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Netty/" itemprop="url" rel="index">
-                    <span itemprop="name">Netty</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/Netty/blogs-Netty/Netty与Spring Boot的整合.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count fb-comments-count" data-href="http://yoursite.com/Netty/blogs-Netty/Netty与Spring Boot的整合.html" itemprop="commentCount">0</span> comments
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://www.jianshu.com/p/222fe9f2a564" target="_blank" rel="noopener">https://www.jianshu.com/p/222fe9f2a564</a><br><a href="https://my.oschina.net/yzwjyw/blog/1614889" target="_blank" rel="noopener">Netty与Spring Boot的整合</a></p>
-<!-- ![Netty实战思维导图](Netty实战思维导图.png) -->
-<img src="/Netty/blogs-Netty/Netty与Spring%20Boot的整合/Netty实战思维导图.png" title="This is an image">
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1999,7 +2149,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">22</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2010,7 +2160,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2021,7 +2171,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">24</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -2082,6 +2232,14 @@
   </a>
 </div>
 
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize("");
+    }
+  </script>
 
         
 
